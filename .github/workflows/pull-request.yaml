@@ -38,10 +38,12 @@ jobs:
       - name: Push Container
         run: |
           IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
-          IMAGE_NAME="harbor.squid-ink.us/politeauthority/polite-cicd"
-          docker tag ${IMAGE_ID} ${IMAGE_NAME}:${{ github.sha }}
-          docker push ${IMAGE_NAME}:${{ github.sha }}
-          echo "## Docker Build" >> $GITHUB_STEP_SUMMARY
-          echo "**Built:** ${IMAGE_NAME}:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          REPO="harbor.squid-ink.us"
+          IMAGE_NAME="politeauthority/polite-cicd"
+          TAG_NAME="${{ github.sha }}""
+          FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
+          docker tag ${IMAGE_ID} ${FULL_NAME}
+          docker push ${FULL_NAME}
+          echo "**Pushed:** ${FULL_NAME}" >> $GITHUB_STEP_SUMMARY
 
 # End File: polite-cicd/.github/workflows/pull-request.yaml
