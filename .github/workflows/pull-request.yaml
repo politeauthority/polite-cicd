@@ -40,7 +40,7 @@ jobs:
           IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
-          TAG_NAME="${{ github.sha }}""
+          TAG_NAME="${{ github.sha }}"
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           docker tag ${IMAGE_ID} ${FULL_NAME}
           docker push ${FULL_NAME}
