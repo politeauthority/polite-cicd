@@ -13,6 +13,11 @@ RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 RUN apt-get update && apt-get install -y helm
 
+# Install pip
+RUN apt install python3-pip -y
+
+# Install yamllint
+RUN pip3 install yamllint --break-system-packages
 
 # install YQ
 # RUN add-apt-repository ppa:rmescandon/yq
