@@ -58,7 +58,7 @@ jobs:
           IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
           REPO="docker.io"
           IMAGE_NAME="politeauthority/polite-cicd"
-          TAG_NAME=$(task get-version)
+          TAG_NAME="$(task get-version)"
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           docker tag ${IMAGE_ID} ${FULL_NAME}
           docker push ${FULL_NAME}
