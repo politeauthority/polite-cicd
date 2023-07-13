@@ -3,13 +3,18 @@ FROM debian:stable-slim
 RUN apt-get update
 RUN apt-get install curl gpg -y
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor |tee /usr/share/keyrings/helm.gpg > /dev/null
-RUN apt-get install apt-transport-https jq git ca-certificates --yes
+RUN apt-get install apt-transport-https jq git wget ca-certificates --yes
 
 # Install kubectl
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-# install Helm
+# Install kustomize
+RUN wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.8.5/kustomize_v3.8.5_linux_amd64.tar.gz && \
+  tar zxf kustomize_v3.8.5_linux_amd64.tar.gz && \
+  mv  kustomize /usr/local/bin
+
+# Install Helm
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 RUN apt-get update && apt-get install -y helm
 
