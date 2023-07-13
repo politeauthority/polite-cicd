@@ -4,7 +4,7 @@ vars:
   CICD_TAG: "0.0.1"
 
 tasks:
-  dev-build:
+  build:
     cmds:
       - docker build -t politeauthority/polite-cicd:{{.CICD_TAG}} .
       - echo "Completed build politeauthority/polite-cicd:{{.CICD_TAG}}"
