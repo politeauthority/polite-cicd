@@ -1,9 +1,11 @@
-# Pull Request
+# Create Production
+# Builds and stores a new version of the image, reading the value of the `VERSION` file for the tag
+# name
 
-name: Pull-Request
+name: Create Production
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
 
 concurrency:
@@ -39,7 +41,8 @@ jobs:
         run: |
           IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
           IMAGE_NAME="harbor.squid-ink.us/politeauthority/polite-cicd"
-          docker tag ${IMAGE_ID} ${IMAGE_NAME}:${{ github.sha }}
+          TAG_NAME=$(task get-version)
+          docker tag ${IMAGE_ID} ${IMAGE_NAME}:${TAG_NAME}
           docker push ${IMAGE_NAME}:${{ github.sha }}
           echo "## Docker Build" >> $GITHUB_STEP_SUMMARY
           echo "**Built:** ${IMAGE_NAME}:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
