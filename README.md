@@ -2,8 +2,8 @@
 A Docker container for CICD operations.
 
 ## Docker Image
-Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.1`
-`docker pull politeauthority/polite-cicd:0.0.1`
+Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.2`
+`docker pull politeauthority/polite-cicd:0.0.2`
 
 ## Included Tooling
  - Git
@@ -13,3 +13,6 @@ Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.1`
  - Docker
  - taskfile
  - helmlint
+
+## Helpers
+Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]

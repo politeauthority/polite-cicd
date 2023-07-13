@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polite-deployment
+  labels:
+    app: polite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: polite
+  template:
+    metadata:
+      labels:
+        app: polite
+    spec:
+      containers:
+      - name: polite
+        image: politeauthority/polite-cicd:0.0.2
+        command: ["tail", "-f", "/dev/null"]

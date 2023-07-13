@@ -6,7 +6,7 @@ name: Create Production
 
 on:
   push:
-    branches: ["cicd"]
+    branches: ["main"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
