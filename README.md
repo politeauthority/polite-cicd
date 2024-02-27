@@ -12,7 +12,11 @@ Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.2`
  - Helm
  - Docker
  - taskfile
- - helmlint
+ - psql
+ - yamllint
+ - ping
+ - traceroute
+ - debug
 
 ## Helpers
 Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]

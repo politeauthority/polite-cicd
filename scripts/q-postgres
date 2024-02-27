@@ -1,0 +1,8 @@
+#!/bin/bash
+# Q Postgres
+DB_HOST="q-postgres-rw.q-postgres.svc.cluster.local"
+DB_USER="q_postgres"
+DB_NAME="postgres"
+echo "Logging into ${DB_HOST}"
+# psql -H ${DB_HOST} -U ${DB_USER} postgres -W
+psql postgresql://$DB_USER:$PGPASSWORD@$DB_HOST:5432/$DB_NAME
