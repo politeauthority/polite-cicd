@@ -1,0 +1,4 @@
+#!/bin/bash
+# Postgres login
+echo "Logging into ${PG_DB_HOST} as ${PG_DB_USER}"
+psql postgresql://$PG_DB_USER:$PGPASSWORD@$PG_DB_HOST:$PG_DB_PORT/$PG_DB_NAME
