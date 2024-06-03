@@ -16,12 +16,6 @@ tasks:
   #     - echo "Completed build politeauthority/polite-cicd:{{.CICD_TAG}}"
   #   silent: false
 
-  run-docker:
-    cmds: -|
-      docker run polite-cicd \
-      --name=polite-cicd \
-      politeauthority/polite-cicd:{{.CICD_TAG}}
-    silent: false
 
   get-version:
     cmds:

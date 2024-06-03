@@ -64,4 +64,4 @@ ADD ./scripts/q-postgres /bin
 # Install debug tools
 RUN apt-get install -y --no-install-recommends dnsutils traceroute iputils-ping && rm -rf /var/lib/apt/lists/*
 
-RUN pipx ensurepath && pipx ensurepath --global
+RUN pipx ensurepath
