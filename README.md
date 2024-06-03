@@ -1,4 +1,4 @@
-# Polite-CICD 0.0.2
+# Polite-CICD 0.0.9
 A Docker container for CICD operations.
 
 ## Docker Image
@@ -16,7 +16,9 @@ Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.2`
  - yamllint
  - ping
  - traceroute
- - debug
+ - python
+   - pipx
+   - poetry
 
 ## Helpers
 Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]
