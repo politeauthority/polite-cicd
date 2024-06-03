@@ -12,6 +12,7 @@ Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.2`
  - Helm
  - Docker
  - taskfile
+<<<<<<< 0.0.9
  - psql
  - yamllint
  - ping
@@ -19,6 +20,9 @@ Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.0.2`
  - python
    - pipx
    - poetry
+=======
+ - helmlint
+>>>>>>> main
 
 ## Helpers
 Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]
