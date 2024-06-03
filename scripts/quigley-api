@@ -1,0 +1,16 @@
+#!/bin/bash
+QUIGLEY_API_AUTH="cXVpZ2xleS1hcGk6MmtwQVRZWThobVg4WWJ5ZVNmQXI="
+if [ -z "$QUIGLEY_API_AUTH" ]; then
+    echo "Missing QUIGLEY_API_AUTH"
+    exit 1
+fi
+
+MSG_FORMATED="<h2>Github Actions</h2>Started Workflow: https://github.com/politeauthority/cver/actions"
+MSG="Github Actions - Started Workflow"
+
+curl \
+    -H "Authorization: Basic ${QUIGLEY_API_AUTH}" \
+    -H "Content-Type: application/json" \
+    -X POST \
+    -d '{"message_formatted": "'"${MSG_FORMATED}"'", "message": "'"${MSG}"'"}' \
+    https://api.alix.lol:443/notify
