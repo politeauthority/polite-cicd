@@ -44,7 +44,7 @@ jobs:
           echo "\n\nDEBUG"
           ls -la
           # SHA=$(git rev-parse --short HEAD)
-          TAG_NAME="${VERSION_NO}"
+          TAG_NAME="${VERSION_NO}-dev"
           echo $TAG_NAME
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           echo $FULL_NAME
