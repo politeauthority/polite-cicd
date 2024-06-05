@@ -39,7 +39,11 @@ jobs:
           IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
-          VERSION_NO=$(cat VERSION)
+          # VERSION_NO=$(cat VERSION)
+          VERSION_NO="0.0.10"
+          echo "\n\nDEBUG"
+          ls -la
+          echo "END DEBUG\n\n"
           TAG_NAME="${VERSION_NO}-${SHA:0:8}"
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           docker tag ${IMAGE_ID} ${FULL_NAME}
