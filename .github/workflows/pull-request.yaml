@@ -43,12 +43,11 @@ jobs:
           # VERSION_NO="0.0.10"
           echo "\n\nDEBUG"
           ls -la
-          SHA=$(git rev-parse --short HEAD)
-          TAG_NAME="${VERSION_NO}-${SHA:0:8}"
+          # SHA=$(git rev-parse --short HEAD)
+          TAG_NAME="${VERSION_NO}"
           echo $TAG_NAME
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           echo $FULL_NAME
-
           echo "END DEBUG\n\n"
           docker tag ${IMAGE_ID} ${FULL_NAME}
           docker push ${FULL_NAME}
