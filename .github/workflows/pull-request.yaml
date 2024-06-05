@@ -40,7 +40,7 @@ jobs:
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
           VERSION_NO=$(cat VERSION)
-          TAG_NAME="${VERSION_NO}-${SHA:0:8}}"
+          TAG_NAME="${VERSION_NO}-${SHA:0:8}"
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           docker tag ${IMAGE_ID} ${FULL_NAME}
           docker push ${FULL_NAME}
