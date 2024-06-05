@@ -38,12 +38,14 @@ RUN echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Run Installs
+# Run Generic Installs
 RUN apt-get update && apt-get install -y --no-install-recommends\
   apt-transport-https jq git python3-pip yq helm \
   docker-ce docker-ce-cli containerd.io \
   docker-buildx-plugin docker-compose-plugin \
   postgresql-client pipx
+
+RUN pipx ensurepath && pipx install poetry
 
 # Install kubectl
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
@@ -64,4 +66,3 @@ ADD ./scripts/q-postgres /bin
 # Install debug tools
 RUN apt-get install -y --no-install-recommends dnsutils traceroute iputils-ping && rm -rf /var/lib/apt/lists/*
 
-RUN pipx ensurepath
