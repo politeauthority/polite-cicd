@@ -1,9 +1,12 @@
 version: "3"
 
+vars:
+  CICD_TAG: "0.0.10"
+
 tasks:
   build:
     cmds:
-      - docker build -t politeauthority/polite-cicd:{{.CICD_TAG}} .
+      - docker build --no-cache -t politeauthority/polite-cicd:{{.CICD_TAG}} .
       - echo "Completed build politeauthority/polite-cicd:{{.CICD_TAG}}"
     silent: false
 
