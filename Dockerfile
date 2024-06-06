@@ -38,10 +38,6 @@ RUN echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-#RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 8C718D3B5072E1F5
-
-#RUN echo "deb http://repo.mysql.com/apt/debian/ buster mysql-8.0" > /etc/apt/sources.list.d/mysql.list
-
 # Install MinIO
  RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
   --create-dirs \
@@ -53,6 +49,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   docker-ce docker-ce-cli containerd.io \
   docker-buildx-plugin docker-compose-plugin \
   postgresql-client pipx default-mysql-client
+
+RUN pipx ensurepath && pipx install poetry
 
 RUN pipx ensurepath && pipx install poetry
 
