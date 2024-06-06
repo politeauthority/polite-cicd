@@ -22,6 +22,8 @@ docker pull politeauthority/polite-cicd:0.0.10
  - python
    - pipx
    - poetry
+ - MinIo
+ - mysql-cli
 
 ## Helpers
 Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]
