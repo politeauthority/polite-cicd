@@ -13,7 +13,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   build-docker:
     runs-on: self-hosted
     container:
@@ -62,6 +61,8 @@ jobs:
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
           docker tag ${IMAGE_ID} ${FULL_NAME}
           docker push ${FULL_NAME}
+          LATEST="${REPO}/${IMAGE_NAME}:latest
+          docker push ${LATEST}
           echo "**Pushed:** ${IMAGE_NAME}:FULL_NAME" >> $GITHUB_STEP_SUMMARY
 
 # End File: polite-cicd/.github/workflows/create-production.yaml

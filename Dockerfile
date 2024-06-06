@@ -38,12 +38,19 @@ RUN echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
+# Install MinIO
+ RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
+  --create-dirs \
+  -o /minio-binaries/mc && chmod +x /minio-binaries/mc && mv /minio-binaries/mc /bin && rm -rf /minio-binaries
+
 # Run Generic Installs
-RUN apt-get update && apt-get install -y --no-install-recommends\
+RUN apt-get update && apt-get install -y --no-install-recommends \
   apt-transport-https jq git python3-pip yq helm \
   docker-ce docker-ce-cli containerd.io \
   docker-buildx-plugin docker-compose-plugin \
-  postgresql-client pipx
+  postgresql-client pipx default-mysql-client
+
+RUN pipx ensurepath && pipx install poetry
 
 RUN pipx ensurepath && pipx install poetry
 
