@@ -17,6 +17,10 @@ RUN apt-get update && \
   iputils-ping \
   pipx
 
+# Add custom scripts
+ADD scripts/ /scripts
+RUN scripts/install/postgres-client.sh
+
 # Add Docker official GPG key and APT repository
 RUN mkdir -p /etc/apt/keyrings && \
   curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
@@ -62,9 +66,6 @@ RUN curl -sSL https://dl.min.io/client/mc/release/linux-amd64/mc -o /usr/local/b
 
 # Install Taskfile
 RUN sh -c "$(curl -s --location https://taskfile.dev/install.sh)" -- -d
-
-# Add custom scripts
-ADD ./scripts/q-postgres /bin
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
