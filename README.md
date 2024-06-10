@@ -8,14 +8,12 @@ docker pull politeauthority/polite-cicd:0.0.11
 ```
 
 ## Included Tooling
-### CLI Tools
-  - `git`
-  - `jq`
- - Kubectl
- - Helm
- - Docker
+- `git`
+- `JQ`
+ - `kubectl`
+ - `helm`
+ - `docker`
  - taskfile
- - psql
  - yamllint
  - ping
  - traceroute
