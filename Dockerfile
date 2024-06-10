@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 # Add custom scripts
 ADD scripts/ /scripts
-RUN scripts/installers/postgres-client.sh
+# RUN scripts/installers/postgres-client.sh
 
 
 # Add Docker official GPG key and APT repository
