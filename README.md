@@ -27,3 +27,9 @@ docker pull politeauthority/polite-cicd:0.0.10
 
 ## Helpers
 Deploy the image to a Kubernetes cluster with [Polite Deployment][helpers/polite-deployment.yaml]
+
+
+## Updating Versions
+Update the following files when creating a new version.
+ - `README.md`
+ - `VERSION`
