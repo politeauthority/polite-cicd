@@ -33,7 +33,6 @@ jobs:
       - name: Build Container
         run: |
           echo "Run Task: Build"
-          export CICD_TAG="${{ github.sha }}"
           task build
 
       - name: Push Container - Harbor

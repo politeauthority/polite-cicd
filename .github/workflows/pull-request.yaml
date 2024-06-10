@@ -32,18 +32,14 @@ jobs:
         run: |
           echo "Run Task: Build"
           export CICD_TAG="${{ github.sha }}"
-          task build
+          task docker-build
 
       - name: Push Container
         run: |
-          IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
+          IMAGE_ID=$(docker images --filter "reference=polite-cicd" --format "{{.ID}}")
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
           VERSION_NO=$(cat VERSION)
-          # VERSION_NO="0.0.10"
-          echo "\n\nDEBUG"
-          ls -la
-          # SHA=$(git rev-parse --short HEAD)
           TAG_NAME="${VERSION_NO}-dev"
           echo $TAG_NAME
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"

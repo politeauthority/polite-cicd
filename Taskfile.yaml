@@ -1,8 +1,5 @@
 version: "3"
 
-vars:
-  CICD_TAG: "0.0.11"
-
 tasks:
   copy-to-build:
     cmds:
@@ -13,7 +10,7 @@ tasks:
 
   docker-build:
     cmds:
-      - docker build --no-cache -t polite-cicd:dev .
+      - docker build --no-cache -t polite-cicd .
     silent: false
 
   # push:
