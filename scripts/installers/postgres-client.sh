@@ -7,5 +7,5 @@ apt-get install -y --no-install-recommends \
 curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
 
 apt-get install -y --no-install-recommends \
-    postgresql postgresql-contrib
+    postgresql-client-16
 echo "Successfully installed Postgres Client"

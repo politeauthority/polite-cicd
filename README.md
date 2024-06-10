@@ -8,8 +8,9 @@ docker pull politeauthority/polite-cicd:0.0.11
 ```
 
 ## Included Tooling
- - Git
- - JQ
+### CLI Tools
+  - `git`
+  - `jq`
  - Kubectl
  - Helm
  - Docker
