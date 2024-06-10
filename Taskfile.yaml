@@ -4,10 +4,16 @@ vars:
   CICD_TAG: "0.0.11"
 
 tasks:
-  build:
+  copy-to-build:
     cmds:
-      - docker build --no-cache -t politeauthority/polite-cicd:{{.CICD_TAG}} .
-      - echo "Completed build politeauthority/polite-cicd:{{.CICD_TAG}}"
+      - scp Dockerfile green-machine.ts:/home/kube/repos/polite-cicd
+      - scp Taskfile.yaml green-machine.ts:/home/kube/repos/polite-cicd
+      - scp -r scripts/ green-machine.ts:/home/kube/repos/polite-cicd
+    silent: false
+
+  docker-build:
+    cmds:
+      - docker build --no-cache -t polite-cicd:dev .
     silent: false
 
   # push:

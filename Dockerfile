@@ -19,7 +19,8 @@ RUN apt-get update && \
 
 # Add custom scripts
 ADD scripts/ /scripts
-RUN scripts/install/postgres-client.sh
+RUN scripts/installers/postgres-client.sh
+
 
 # Add Docker official GPG key and APT repository
 RUN mkdir -p /etc/apt/keyrings && \
@@ -69,6 +70,3 @@ RUN sh -c "$(curl -s --location https://taskfile.dev/install.sh)" -- -d
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Ensure executable permissions for custom scripts
-RUN chmod +x /bin/q-postgres
