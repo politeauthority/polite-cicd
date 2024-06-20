@@ -1,20 +1,19 @@
-# Polite-CICD 0.0.11
+# Polite-CICD 0.0.12
 A Docker container for CICD operations.
 
 ## Docker Image
-Currently hosted on Docker Hub at `politeauthority/polite-cicd:0.010`
+Currently hosted on Docker Hub at `politeauthority/polite-cicd:latest`
 ```bash
-docker pull politeauthority/polite-cicd:0.0.11
+docker pull politeauthority/polite-cicd:latest
 ```
 
 ## Included Tooling
- - Git
- - JQ
- - Kubectl
- - Helm
- - Docker
+- `git`
+- `JQ`
+ - `kubectl`
+ - `helm`
+ - `docker`
  - taskfile
- - psql
  - yamllint
  - ping
  - traceroute
