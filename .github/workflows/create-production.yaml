@@ -33,7 +33,7 @@ jobs:
       - name: Build Container
         run: |
           echo "Run Task: Build"
-          task build
+          task docker-build
 
       - name: Push Container - Harbor
         run: |

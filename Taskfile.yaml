@@ -10,7 +10,7 @@ tasks:
 
   docker-build:
     cmds:
-      - docker build --no-cache -t polite-cicd .
+      - docker build --no-cache -t politeauthority/polite-cicd .
     silent: false
 
   # push:
