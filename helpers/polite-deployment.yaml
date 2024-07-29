@@ -15,6 +15,6 @@ spec:
         app: polite
     spec:
       containers:
-      - name: polite
-        image: politeauthority/polite-cicd:0.0.2
-        command: ["tail", "-f", "/dev/null"]
+        - name: polite
+          image: politeauthority/polite-cicd:latest
+          command: ["tail", "-f", "/dev/null"]

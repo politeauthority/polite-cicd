@@ -1,4 +1,4 @@
-# Polite-CICD 0.0.12
+# Polite-CICD 0.0.13
 A Docker container for CICD operations.
 
 ## Docker Image
@@ -8,17 +8,21 @@ docker pull politeauthority/polite-cicd:latest
 ```
 
 ## Included Tooling
-- `git`
-- `JQ`
- - `kubectl`
- - `helm`
- - `docker`
- - taskfile
- - yamllint
- - ping
- - traceroute
- - helmlint
+Running on Debian 12 we include the following tools.
+ - `git`
+ - `jq`
+ - `yq`
+ - `yamllint`
+ - `taskfile`
+ - Virtualization
+   - `kubectl`
+   - `docker`
+   - `helm`
+ - Network Tools
+  - `ping`
+  - `traceroute`
  - python
+   - python 3.11
    - pipx
    - poetry
  - MinIo
