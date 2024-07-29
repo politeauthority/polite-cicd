@@ -15,7 +15,8 @@ RUN apt-get update && \
   dnsutils \
   traceroute \
   iputils-ping \
-  pipx
+  pipx \
+  gawk
 
 # Add custom scripts
 ADD scripts/ /scripts
