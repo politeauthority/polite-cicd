@@ -16,7 +16,8 @@ jobs:
   build-docker:
     runs-on: self-hosted
     container:
-      image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      # image: harbor.squid-ink.us/politeauthority/polite-cicd:${{ vars.CICD_VERSION }}
+      image: politeauthority/polite-cicd:latest
       credentials:
         username: ${{ vars.HARBOR_USER }}
         password: ${{ secrets.HARBOR_PASSWORD }}
