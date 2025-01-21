@@ -43,6 +43,7 @@ jobs:
           IMAGE_NAME="politeauthority/polite-cicd"
           TAG_NAME=$(task get-version)
           FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
+          echo "Image ID: ${IMAGE_ID}"
           # echo "DEBUG IMAGE ID: ${IMAGE_ID}"
           # echo "docker tag ${IMAGE_ID} ${FULL_NAME}"
           # docker tag $IMAGE_ID $FULL_NAME
