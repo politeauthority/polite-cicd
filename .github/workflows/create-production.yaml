@@ -49,9 +49,9 @@ jobs:
           docker tag $IMAGE_ID harbor.squid-ink.us/politeauthority/polite-cicd:latest
           docker push ${FULL_NAME}
 
-          LATEST="${REPO}/${IMAGE_NAME}:latest"
-          docker tag ${IMAGE_ID} ${LATEST}
-          docker push ${LATEST}
+          # LATEST="${REPO}/${IMAGE_NAME}:latest"
+          # docker tag ${IMAGE_ID} ${LATEST}
+          # docker push ${LATEST}
           echo "**Pushed:** ${IMAGE_NAME}:FULL_NAME" >> $GITHUB_STEP_SUMMARY
 
       - uses: docker/login-action@v2
