@@ -38,18 +38,19 @@ jobs:
 
       - name: Push Container - Harbor
         run: |
-          IMAGE_ID=$(docker images --filter "reference=politeauthority/polite-cicd" --format "{{.ID}}")
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
-          TAG_NAME=$(task get-version)
-          FULL_NAME="${REPO}/${IMAGE_NAME}:${TAG_NAME}"
-          echo "Image ID: ${IMAGE_ID}"
-          # echo "DEBUG IMAGE ID: ${IMAGE_ID}"
-          # echo "docker tag ${IMAGE_ID} ${FULL_NAME}"
-          # docker tag $IMAGE_ID $FULL_NAME
-          echo "docker tag ${IMAGE_ID} harbor.squid-ink.us/politeauthority/polite-cicd:latest"
-          docker tag ${IMAGE_ID} harbor.squid-ink.us/politeauthority/polite-cicd:latest
-          docker push harbor.squid-ink.us/politeauthority/polite-cicd:latest
+          IMAGE_ID=$(docker images --format "{{.ID}}" --sort=created | head -n 1)
+          # Check if IMAGE_ID is not empty
+          if [ -n "$IMAGE_ID" ]; then
+            echo "Image ID: ${IMAGE_ID}"
+            TAG="latest"
+            docker tag $IMAGE_ID $REPO/$IMAGE_NAME:$TAG
+            echo "Tagged image ID $IMAGE_ID with name $REPO/$IMAGE_NAME:$TAG
+          else
+            echo "No Docker images found."
+          fi
+          docker push $REPO/$IMAGE_NAME:$TAG
 
           # LATEST="${REPO}/${IMAGE_NAME}:latest"
           # docker tag ${IMAGE_ID} ${LATEST}
