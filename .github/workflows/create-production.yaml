@@ -47,7 +47,8 @@ jobs:
           # echo "DEBUG IMAGE ID: ${IMAGE_ID}"
           # echo "docker tag ${IMAGE_ID} ${FULL_NAME}"
           # docker tag $IMAGE_ID $FULL_NAME
-          docker tag $IMAGE_ID harbor.squid-ink.us/politeauthority/polite-cicd:latest
+          echo "docker tag ${IMAGE_ID} harbor.squid-ink.us/politeauthority/polite-cicd:latest"
+          docker tag ${IMAGE_ID} harbor.squid-ink.us/politeauthority/polite-cicd:latest
           docker push harbor.squid-ink.us/politeauthority/polite-cicd:latest
 
           # LATEST="${REPO}/${IMAGE_NAME}:latest"
