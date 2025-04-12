@@ -40,7 +40,7 @@ jobs:
         run: |
           REPO="harbor.squid-ink.us"
           IMAGE_NAME="politeauthority/polite-cicd"
-          IMAGE_ID=$(docker images --format "{{.ID}}" --sort=created | head -n 1)
+          IMAGE_ID=$(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | head -n 1 | awk '{print $1}')
           # Check if IMAGE_ID is not empty
           if [ -n "$IMAGE_ID" ]; then
             echo "Image ID: ${IMAGE_ID}"
