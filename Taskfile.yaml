@@ -19,6 +19,20 @@ tasks:
   #     - echo "Completed build politeauthority/polite-cicd:{{.CICD_TAG}}"
   #   silent: false
 
+  build-push:
+    desc: Build amd64 image on M1, increment patch version, and push to Harbor
+    vars:
+      NEW_VERSION:
+        sh: awk -F. '{print $1"."$2"."$3+1}' VERSION
+      REGISTRY: harbor.squid-ink.us
+      IMAGE: politeauthority/polite-cicd
+    cmds:
+      - echo "Building {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} for linux/amd64..."
+      - docker buildx build --platform linux/amd64 --no-cache -t {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} -t {{.REGISTRY}}/{{.IMAGE}}:latest --push .
+      - echo "{{.NEW_VERSION}}" > VERSION
+      - echo "Done! Pushed {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} and :latest"
+    silent: false
+
   get-version:
     cmds:
       - cat VERSION
