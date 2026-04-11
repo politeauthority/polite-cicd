@@ -55,7 +55,7 @@ RUN curl -LOs "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/
   rm -f kubectl
 
 # Install kustomize
-RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.8.5/kustomize_v3.8.5_linux_amd64.tar.gz | \
+RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.8.1/kustomize_v5.8.1_linux_amd64.tar.gz | \
   tar zxf - -C /usr/local/bin kustomize
 
 # Install poetry and yamllint via pipx
