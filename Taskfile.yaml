@@ -33,6 +33,29 @@ tasks:
       - echo "Done! Pushed {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} and :latest"
     silent: false
 
+  # The Node variant (Dockerfile.node) — stocky-frontend's CI image. Tagged with
+  # the same version as the polite-cicd it is built FROM, so the pair is always
+  # legible: polite-cicd-node:0.0.16 is polite-cicd:0.0.16 plus Node.
+  # Run this AFTER build-push, so the base tag it references already exists.
+  build-push-node:
+    desc: Build and push the Node variant (polite-cicd + Node 22) for linux/amd64
+    vars:
+      VERSION:
+        sh: cat VERSION
+      REGISTRY: harbor.squid-ink.us
+      IMAGE: politeauthority/polite-cicd-node
+    cmds:
+      - echo "Building {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}} FROM polite-cicd:{{.VERSION}} ..."
+      - |
+        docker buildx build --platform linux/amd64 \
+          --build-arg CICD_VERSION={{.VERSION}} \
+          -f Dockerfile.node \
+          -t {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}} \
+          -t {{.REGISTRY}}/{{.IMAGE}}:latest \
+          --push .
+      - echo "Done! Pushed {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}} and :latest"
+    silent: false
+
   get-version:
     cmds:
       - cat VERSION
