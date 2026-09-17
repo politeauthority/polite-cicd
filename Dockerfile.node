@@ -1,0 +1,25 @@
+# polite-cicd + Node 22.
+#
+# Why this exists as a separate image rather than a few more lines in the main
+# Dockerfile: stocky-frontend is the only repo that needs Node, and its CI was
+# spending 38-59s per job in actions/setup-node because a container job has no
+# tool cache — setup-node re-downloads the whole Node distribution every time.
+# Baking Node into the shared polite-cicd would fix that by making stocky and
+# stocky-traders pull ~130MB they never use, on every job. So: one extra layer
+# on top of the shared image, for the one consumer that wants it.
+#
+# Built FROM the published polite-cicd so it inherits the toolchain rather than
+# duplicating it, and so the two can never drift.
+ARG CICD_VERSION=latest
+FROM harbor.squid-ink.us/politeauthority/polite-cicd:${CICD_VERSION}
+
+# NodeSource rather than Debian's nodejs package: stable-slim ships a Node far
+# behind 22, and this matches how the base image installs docker and gh.
+# NODE_MAJOR is an ARG so a future bump is a build flag, not an edit.
+ARG NODE_MAJOR=22
+RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - && \
+  apt-get install --no-install-recommends -y nodejs && \
+  apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Fail the build rather than ship an image that silently lacks what it is for.
+RUN node --version && npm --version
