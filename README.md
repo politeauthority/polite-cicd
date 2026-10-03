@@ -2,9 +2,9 @@
 A Docker container for CICD operations.
 
 ## Docker Image
-Hosted on Harbor at `harbor.squid-ink.us/politeauthority/polite-cicd:latest`
+Hosted on Harbor at `harbor.alix.lol/politeauthority/polite-cicd:latest`, built for `linux/amd64` and `linux/arm64`.
 ```bash
-docker pull harbor.squid-ink.us/politeauthority/polite-cicd:latest
+docker pull harbor.alix.lol/politeauthority/polite-cicd:latest
 ```
 
 ## Variants
@@ -38,6 +38,7 @@ Running on Debian stable (slim) with the following tools:
   - `docker` (CE + buildx + compose)
   - `helm`
   - `gh` (GitHub CLI)
+- `uv`
 - Network tools: `ping`, `traceroute`, `dnsutils`
 - Python: `python3`, `pipx`, `poetry`
 - MinIO client (`mc`)
