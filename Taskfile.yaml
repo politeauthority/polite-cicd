@@ -1,5 +1,10 @@
 version: "3"
 
+# Both architectures: the arm64 image lets CI jobs run on mac-worker. On the Mac,
+# arm64 builds natively and amd64 runs under emulation.
+vars:
+  PLATFORMS: linux/amd64,linux/arm64
+
 tasks:
   copy-to-build:
     cmds:
@@ -20,15 +25,15 @@ tasks:
   #   silent: false
 
   build-push:
-    desc: Build amd64 image on M1, increment patch version, and push to Harbor
+    desc: Build amd64 + arm64 images on the Mac, increment patch version, and push to Harbor
     vars:
       NEW_VERSION:
         sh: awk -F. '{print $1"."$2"."$3+1}' VERSION
-      REGISTRY: harbor.squid-ink.us
+      REGISTRY: harbor.alix.lol
       IMAGE: politeauthority/polite-cicd
     cmds:
-      - echo "Building {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} for linux/amd64..."
-      - docker buildx build --platform linux/amd64 --no-cache -t {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} -t {{.REGISTRY}}/{{.IMAGE}}:latest --push .
+      - echo "Building {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} for {{.PLATFORMS}}..."
+      - docker buildx build --platform {{.PLATFORMS}} --no-cache -t {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} -t {{.REGISTRY}}/{{.IMAGE}}:latest --push .
       - echo "{{.NEW_VERSION}}" > VERSION
       - echo "Done! Pushed {{.REGISTRY}}/{{.IMAGE}}:{{.NEW_VERSION}} and :latest"
     silent: false
@@ -38,16 +43,16 @@ tasks:
   # legible: polite-cicd-node:0.0.16 is polite-cicd:0.0.16 plus Node.
   # Run this AFTER build-push, so the base tag it references already exists.
   build-push-node:
-    desc: Build and push the Node variant (polite-cicd + Node 22) for linux/amd64
+    desc: Build and push the Node variant (polite-cicd + Node 22) for amd64 + arm64
     vars:
       VERSION:
         sh: cat VERSION
-      REGISTRY: harbor.squid-ink.us
+      REGISTRY: harbor.alix.lol
       IMAGE: politeauthority/polite-cicd-node
     cmds:
       - echo "Building {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}} FROM polite-cicd:{{.VERSION}} ..."
       - |
-        docker buildx build --platform linux/amd64 \
+        docker buildx build --platform {{.PLATFORMS}} \
           --build-arg CICD_VERSION={{.VERSION}} \
           -f Dockerfile.node \
           -t {{.REGISTRY}}/{{.IMAGE}}:{{.VERSION}} \

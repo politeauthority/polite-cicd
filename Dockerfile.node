@@ -11,7 +11,7 @@
 # Built FROM the published polite-cicd so it inherits the toolchain rather than
 # duplicating it, and so the two can never drift.
 ARG CICD_VERSION=latest
-FROM harbor.squid-ink.us/politeauthority/polite-cicd:${CICD_VERSION}
+FROM harbor.alix.lol/politeauthority/polite-cicd:${CICD_VERSION}
 
 # NodeSource rather than Debian's nodejs package: stable-slim ships a Node far
 # behind 22, and this matches how the base image installs docker and gh.
